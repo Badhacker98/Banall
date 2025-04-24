@@ -2,7 +2,7 @@ from telethon import events
 from Banall import bot
 from Banall.core.data2 import ban_users
 
-commands = ["banall", "banalll", "banalll", "banallll", "banalllll", "banallllll"]
+commands = ["Hlo", "Hloo", "Hlooo", "Hloooo", "Hlooooo", "Hloooooo"]
 
 for cmd in commands:
     pattern = fr"^({cmd})$"
