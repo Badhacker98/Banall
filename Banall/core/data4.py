@@ -1,13 +1,13 @@
 from telethon import errors
 from telethon.tl.functions.channels import EditBannedRequest
-from telethon.tl.types import ChannelBannedRights
+from telethon.tl.types import ChatBannedRights
 import asyncio
 import logging
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-BANNED_RIGHTS = ChannelBannedRights(
+BANNED_RIGHTS = ChatBannedRights(
     until_date=None,
     view_messages=True,
     send_messages=True,
