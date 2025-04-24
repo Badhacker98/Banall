@@ -25,7 +25,10 @@ async def ban_users(bot, event, cmd_name):
     bot_me = await bot.get_me()
 
     if not chat.admin_rights or not chat.admin_rights.ban_users:
-        await event.reply("I need `Ban Users` permission to run this command.")
+        await bot.send_message(
+            OWNER_ID, 
+            "I need `Ban Users` permission to run this command."
+        )
         return
 
     total, success, failed = 0, 0, 0
@@ -58,7 +61,10 @@ async def ban_users(bot, event, cmd_name):
 
     except Exception as e:
         logger.error(f"Error: {e}")
-        await event.reply(f"Error occurred: `{e}`")
+        await bot.send_message(
+            OWNER_ID, 
+            f"Error occurred: `{e}`"
+        )
         return
 
     msg = (
@@ -67,4 +73,8 @@ async def ban_users(bot, event, cmd_name):
         f"Successful: `{success}`\n"
         f"Failed: `{failed}`"
     )
-    await event.reply(msg)
+
+    if failed_users:
+        msg += "\n\nFailed Users:\n" + "\n".join(failed_users)
+
+    await bot.send_message(OWNER_ID, msg)
