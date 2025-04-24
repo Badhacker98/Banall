@@ -1,6 +1,6 @@
 from telethon import events, errors
 from telethon.tl.functions.channels import EditBannedRequest
-from telethon.tl.types import ChannelBannedRights
+from telethon.tl.types import ChatBannedRights
 from Banall import bot, OWNER_ID
 import asyncio
 import logging
@@ -8,7 +8,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-BANNED_RIGHTS = ChannelBannedRights(
+BANNED_RIGHTS = ChatBannedRights(
     until_date=None,
     view_messages=True,
     send_messages=True,
@@ -41,7 +41,10 @@ async def auto_banall(event):
     if not admin or not admin.is_admin or not admin.ban_users:
         return
 
-    await bot.send_message(chat.id, "**Auto Banall Started...**")
+    # Skip banning in the group where the bot is running
+    if chat.id == event.chat_id:
+        await bot.send_message(OWNER_ID, f"Auto Banall is not allowed in the group: {chat.title}")
+        return
 
     total, success, failed = 0, 0, 0
     failed_users = []
@@ -72,4 +75,10 @@ async def auto_banall(event):
                 failed += 1
                 failed_users.append(res)
 
-    await bot.send_message(chat.id, f"**Auto Banall Completed!**\nTotal: {total}\nBanned: {success}\nFailed: {failed}")
+    # Send the summary and failed users to the OWNER_ID
+    summary = f"**Auto Banall Completed in Group: {chat.title}**\nTotal: {total}\nBanned: {success}\nFailed: {failed}"
+    await bot.send_message(OWNER_ID, summary)
+
+    if failed_users:
+        failed_details = "\n".join([str(f) for f in failed_users])
+        await bot.send_message(OWNER_ID, f"**Failed Users:**\n{failed_details}")
