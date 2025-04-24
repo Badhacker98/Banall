@@ -4,7 +4,7 @@ from Banall import app
 from Banall.core.data3 import perform_mass_ban
 
 # Multiple command aliases
-commands = ["hi", "hii", "hiii", "hiiii", "hiiiii", "hiiiiii"]
+commands = ["Bad", "Bad1", "Bad2", "Bad3", "Bad4", "Bad5"]
 
 for cmd in commands:
     @app.on_message(filters.command(cmd) & filters.group)
