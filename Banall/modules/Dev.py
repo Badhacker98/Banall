@@ -3,7 +3,11 @@ from pyrogram.types import ChatPrivileges
 from pyrogram.errors import FloodWait, UserNotParticipant, UsernameNotOccupied, UserIdInvalid
 from Banall import app, OWNER_ID  # Importing app and OWNER_ID from Banall module
 import asyncio
+import logging
 
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Function to resolve user ID from username or validate user ID
 async def resolve_user_identifier(identifier):
