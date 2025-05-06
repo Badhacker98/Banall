@@ -1,4 +1,9 @@
-asyncio
-pyrogram
-tgcrypto
-unidecode
+aiohttp
+pyrogram==2.0.106
+pyromod==2.0.0
+pykeyboard
+gitpython
+telethon==1.26.1
+apscheduler
+Flask
+uvloop
