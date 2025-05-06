@@ -19,7 +19,7 @@
       }
    ],
    "env": {
-      "TOKEN": {
+      "BOT_TOKEN": {
          "description": "Your bot token. Can be obtained from https://telegram.dog/BotFather/",
          "required": true,
          "value": "YOUR BOT_TOKEN"
