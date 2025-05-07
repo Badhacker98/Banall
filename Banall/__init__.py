@@ -21,7 +21,7 @@ LOGGER = logging.getLogger(__name__)
 boot = time.time()
 OWNER = config.OWNER_ID
 
-class App(Client):
+class app(Client):
     def __init__(self):
         super().__init__(
             name="Banall",
@@ -52,5 +52,5 @@ class App(Client):
 
 if __name__ == "__main__":
     LOGGER.info("Starting the bot...")
-    app = App()
+    app = app()
     app.run()
