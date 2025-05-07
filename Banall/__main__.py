@@ -5,9 +5,11 @@ from pyrogram.errors import FloodWait
 from telethon.errors import FloodError
 from telethon.sync import TelegramClient
 
-# Mocked configurations and variables for demonstration
-from config import API_ID, API_HASH, BOT_TOKEN, ALL_MODULES, BOT_USERNAME
+from config import OWNER_ID, BOT_USERNAME
+from Banall import app, bot
 from Banall import LOGGER as LOG
+from Banall.modules import ALL_MODULES 
+
 
 # Initialize Pyrogram and Telethon clients
 app = None  # Pyrogram Client initialized globally
