@@ -1,63 +1,90 @@
-import sys
 import asyncio
 import importlib
-from flask import Flask
-import threading
 from pyrogram import idle
-from pyrogram.types import BotCommand
-from config import OWNER_ID
-from Banall import LOGGER, app
-from Banall.modules import ALL_MODULES
+from pyrogram.errors import FloodWait
+from telethon.errors import FloodError
+from telethon.sync import TelegramClient
+
+# Mocked configurations and variables for demonstration
+from config import API_ID, API_HASH, BOT_TOKEN, ALL_MODULES, BOT_USERNAME
+from Banall import LOGGER as LOG
+
+# Initialize Pyrogram and Telethon clients
+app = None  # Pyrogram Client initialized globally
+bot = None #Telethone Client initialized globally
+
+
+async def start_pyrogram():
+    global app
+    try:
+        LOG.info("Starting Pyrogram Client...")
+        app = app or await app.start()  # Ensure app is started only once
+        LOG.info("Pyrogram Client started successfully.")
+    except Exception as ex:
+        LOG.error(f"Error starting Pyrogram Client: {ex}")
+        raise ex
+
+
+async def start_telethon():
+    try:
+        LOG.info("Starting Telethon Client...")
+        await bot.start(bot_token=BOT_TOKEN)
+        LOG.info("Telethon Client started successfully.")
+    except Exception as ex:
+        LOG.error(f"Error starting Telethon Client: {ex}")
+        raise ex
 
 
 async def anony_boot():
-    try:
-        await app.start()
-    except Exception as ex:
-        LOGGER.error(ex)
-        sys.exit(1)
+    pyrogram_started = False
+    telethon_started = False
 
+    # Attempt to start Pyrogram Client
+    try:
+        await start_pyrogram()
+        pyrogram_started = True
+    except Exception as ex:
+        LOG.warning(f"Pyrogram failed to start: {ex}. Continuing with Telethon only...")
+
+    # Attempt to start Telethon Client
+    try:
+        await start_telethon()
+        telethon_started = True
+    except Exception as ex:
+        LOG.warning(f"Telethon failed to start: {ex}. Continuing with Pyrogram only...")
+
+    # Ensure at least one client is running
+    if not pyrogram_started and not telethon_started:
+        LOG.critical("Both Pyrogram and Telethon failed to start. Exiting...")
+        quit(1)
+
+    # Load all modules
     for all_module in ALL_MODULES:
         importlib.import_module("Banall.modules." + all_module)
-        LOGGER.info(f"ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ɪᴍᴘᴏʀᴛᴇᴅ: {all_module}")
 
-    # Set bot commands
-    try:
-        await app.set_bot_commands(
-            commands=[
-                BotCommand("start", "✧ sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ ✧"),
-                BotCommand("help", "✧ ɢᴇᴛ ᴛʜᴇ ʜᴇʟᴘ ᴍᴇɴᴜ ✧"),
-            ]
-        )
-        LOGGER.info("ʙᴏᴛ ᴄᴏᴍᴍᴀɴᴅꜱ ꜱᴇᴛ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ.")
-    except Exception as ex:
-        LOGGER.error(f"ꜰᴀɪʟᴇᴅ ᴛᴏ ꜱᴇᴛ ʙᴏᴛ ᴄᴏᴍᴍᴀɴᴅꜱ: {ex}")
-
-    LOGGER.info(f"@{app.username} Started.")
-    try:
-        await app.send_message(int(OWNER_ID), f"{app.mention} has started")
-    except Exception as ex:
-        LOGGER.info(f"@{app.username} ꜱᴛᴀʀᴛᴇᴅ, ᴘʟᴇᴀꜱᴇ ꜱᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ ꜰʀᴏᴍ ᴏᴡɴᴇʀ ɪᴅ.")
+    LOG.info(f"@{BOT_USERNAME} Started with fallback mechanism.")
     
-    await idle()
+    try:
+        await idle()
+    except (FloodWait, FloodError) as flood_ex:
+        LOG.warning(f"Flood detected: {flood_ex}. Fallback mechanism will be activated.")
+        if pyrogram_started:
+            LOG.info("Stopping Pyrogram due to flood...")
+            await app.stop()
+            pyrogram_started = False
+        elif telethon_started:
+            LOG.info("Stopping Telethon due to flood...")
+            await bot.disconnect()
+            telethon_started = False
 
+        # Attempt to restart the other client
+        if not pyrogram_started:
+            await start_pyrogram()
+        if not telethon_started:
+            await start_telethon()
 
-# Flask Server Code for Health Check
-app = Flask(__name__)
+    LOG.info("Stopping Banall Bot...")
 
-@app.route('/')
-def home():
-    return "Bot is running"
-
-def run_flask():
-    app.run(host="0.0.0.0", port=8000)
 
 if __name__ == "__main__":
-    # Start Flask server in a new thread
-    flask_thread = threading.Thread(target=run_flask)
-    flask_thread.start()
-
-    # Start the bot asynchronously
     asyncio.get_event_loop().run_until_complete(anony_boot())
-    LOGGER.info("ꜱᴛᴏᴘᴘɪɴɢ ʙᴀɴᴀʟʟ ʙᴏᴛ...")
-    
