@@ -42,24 +42,13 @@ class app(Client):
         )
 
     async def start(self):
-        await super().start()
+    await super().start()
+    self.id = self.me.id
+    self.name = self.me.first_name + " " + (self.me.last_name or "")
+    self.username = self.me.username
+    self.mention = self.me.mention
 
-        # Start Telethon Client
-        await self.bot.start()
+async def stop(self):
+    await super().stop()
 
-        self.id = self.me.id
-        self.name = self.me.first_name + " " + (self.me.last_name or "")
-        self.username = self.me.username
-        self.mention = self.me.mention
-
-        LOGGER.info("Bot started as %s", self.username)
-
-    async def stop(self):
-        # Stop Telethon Client
-        await self.bot.disconnect()
-
-        await super().stop()
-        LOGGER.info("Bot stopped.")
-
-
-app = app()
+LOG.info("Starting the bots...")
