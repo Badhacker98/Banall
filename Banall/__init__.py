@@ -21,8 +21,7 @@ LOGGER = logging.getLogger(__name__)
 boot = time.time()
 OWNER = config.OWNER_ID
 
-
-class app(Client):
+class App(Client):
     def __init__(self):
         super().__init__(
             name="Banall",
@@ -42,13 +41,16 @@ class app(Client):
         )
 
     async def start(self):
-    await super().start()
-    self.id = self.me.id
-    self.name = self.me.first_name + " " + (self.me.last_name or "")
-    self.username = self.me.username
-    self.mention = self.me.mention
+        await super().start()
+        self.id = self.me.id
+        self.name = self.me.first_name + " " + (self.me.last_name or "")
+        self.username = self.me.username
+        self.mention = self.me.mention
 
-async def stop(self):
-    await super().stop()
+    async def stop(self):
+        await super().stop()
 
-LOG.info("Starting the bots...")
+if __name__ == "__main__":
+    LOGGER.info("Starting the bot...")
+    app = App()
+    app.run()
