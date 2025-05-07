@@ -2,6 +2,7 @@ import logging
 import time
 from Abg import patch
 from pyrogram import Client
+from telethon import TelegramClient
 from pyrogram.enums import ParseMode
 import config
 import uvloop
@@ -32,6 +33,13 @@ class app(Client):
             in_memory=True,
             parse_mode=ParseMode.DEFAULT,
         )
+        
+# Initialize Telethon Client
+bot = TelegramClient(
+    "Banall2",
+    api_id=API_ID,
+    api_hash=API_HASH
+)
 
     async def start(self):
         await super().start()
