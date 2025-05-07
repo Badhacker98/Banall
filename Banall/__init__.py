@@ -44,4 +44,4 @@ class app(Client):
         await super().stop()
 
 
-Banall = app()
+app = app()
