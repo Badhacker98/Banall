@@ -1,3 +1,4 @@
+import os
 from os import getenv
 
 from pyrogram import filters
