@@ -34,22 +34,32 @@ class app(Client):
             parse_mode=ParseMode.DEFAULT,
         )
         
-# Initialize Telethon Client
-bot = TelegramClient(
-    "Banall2",
-    api_id=API_ID,
-    api_hash=API_HASH
-)
+        # Initialize Telethon Client
+        self.bot = TelegramClient(
+            "Banall2",
+            api_id=config.API_ID,
+            api_hash=config.API_HASH,
+        )
 
     async def start(self):
         await super().start()
+
+        # Start Telethon Client
+        await self.bot.start()
+
         self.id = self.me.id
         self.name = self.me.first_name + " " + (self.me.last_name or "")
         self.username = self.me.username
         self.mention = self.me.mention
 
+        LOGGER.info("Bot started as %s", self.username)
+
     async def stop(self):
+        # Stop Telethon Client
+        await self.bot.disconnect()
+
         await super().stop()
+        LOGGER.info("Bot stopped.")
 
 
 app = app()
