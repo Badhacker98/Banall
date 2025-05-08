@@ -25,7 +25,8 @@ async def start_pyrogram():
 async def start_telethon():
     try:
         LOG.info("Starting Telethon Client...")
-        await bot.start(bot_token=BOT_TOKEN)
+        # Directly start the session without requiring BOT_TOKEN
+        await bot.start()  # Session starts directly
         LOG.info("Telethon Client started successfully.")
     except Exception as ex:
         LOG.error(f"Error starting Telethon Client: {ex}")
