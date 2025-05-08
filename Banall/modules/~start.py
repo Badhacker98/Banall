@@ -1,7 +1,8 @@
 import time
 import random
 import requests
-from Banall import app, BOT_USERNAME
+from Banall import app
+from config import OWNER_ID, BOT_USERNAME
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup , CallbackQuery 
 
