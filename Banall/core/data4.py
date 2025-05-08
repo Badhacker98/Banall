@@ -3,7 +3,7 @@ from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
 import asyncio
 import logging
-from Banall import OWNER_ID
+from config import OWNER_ID
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
