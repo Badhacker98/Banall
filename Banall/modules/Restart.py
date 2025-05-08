@@ -1,6 +1,7 @@
 from telethon import events
 import sys
-from Banall import bot, OWNER_ID
+from Banall import bot
+from config import OWNER_ID
 
 @bot.on(events.NewMessage(pattern=r'^/off$'))
 async def shutdown_handler(event):
