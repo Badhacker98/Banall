@@ -50,6 +50,9 @@ class app(Client):
     async def stop(self):
         await super().stop()
 
+# Expose bot for import
+bot = app().bot
+
 if __name__ == "__main__":
     LOGGER.info("Starting the bot...")
     app = app()
