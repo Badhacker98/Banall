@@ -6,6 +6,7 @@ from telethon import TelegramClient
 from pyrogram.enums import ParseMode
 import config
 import uvloop
+from config import API_ID, API_HASH, BOT_TOKEN
 
 uvloop.install()
 
