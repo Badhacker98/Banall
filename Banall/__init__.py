@@ -49,4 +49,4 @@ async def start(self):
 async def stop(self):
     await super().stop()
 
-LOG.info("Starting the bots...")
+LOGGER.info("Starting the bots...")
