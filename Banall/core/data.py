@@ -1,7 +1,7 @@
 import asyncio
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
-from Banall import OWNER_ID
+from config import OWNER_ID
 
 ban_rights = ChatBannedRights(
     until_date=None,
