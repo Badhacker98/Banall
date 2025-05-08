@@ -1,6 +1,6 @@
 from pyrogram.types import Message
 import asyncio
-from Banall import OWNER_ID
+from config import OWNER_ID
 
 async def perform_mass_ban(client, message: Message):
     chat_id = message.chat.id
