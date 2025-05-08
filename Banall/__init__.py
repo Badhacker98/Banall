@@ -36,8 +36,7 @@ app = Client(
 bot = TelegramClient(
     "TelethonBOT",
     api_id=API_ID,
-    api_hash=API_HASH,
-    bot_token=BOT_TOKEN
+    api_hash=API_HASH
 )
 
 async def start(self):
