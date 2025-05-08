@@ -2,7 +2,7 @@ import asyncio
 from telethon import functions
 from telethon.errors import FloodWaitError
 from telethon.tl.types import ChatBannedRights, ChannelParticipantsAdmins
-from Banall import OWNER_ID
+from config import OWNER_ID
 
 BANNED_RIGHTS = ChatBannedRights(
     until_date=None,
