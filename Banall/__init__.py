@@ -21,39 +21,30 @@ LOGGER = logging.getLogger(__name__)
 boot = time.time()
 OWNER = config.OWNER_ID
 
-class app(Client):
-    def __init__(self):
-        super().__init__(
-            name="Banall",
-            api_id=config.API_ID,
-            api_hash=config.API_HASH,
-            lang_code="en",
-            bot_token=config.BOT_TOKEN,
-            in_memory=True,
-            parse_mode=ParseMode.DEFAULT,
-        )
-        
-        # Initialize Telethon Client
-        self.bot = TelegramClient(
-            "Banall2",
-            api_id=config.API_ID,
-            api_hash=config.API_HASH,
-        )
+# Initialize Pyrogram Client
+app = Client(
+    "BOT",
+    api_id=API_ID,
+    api_hash=API_HASH,
+    bot_token=TOKEN,
+    plugins=dict(root="Banall.modules")
+)
 
-    async def start(self):
-        await super().start()
-        self.id = self.me.id
-        self.name = self.me.first_name + " " + (self.me.last_name or "")
-        self.username = self.me.username
-        self.mention = self.me.mention
+# Initialize Telethon Client
+bot = TelegramClient(
+    "TelethonBOT",
+    api_id=API_ID,
+    api_hash=API_HASH
+)
 
-    async def stop(self):
-        await super().stop()
+async def start(self):
+    await super().start()
+    self.id = self.me.id
+    self.name = self.me.first_name + " " + (self.me.last_name or "")
+    self.username = self.me.username
+    self.mention = self.me.mention
 
-# Expose bot for import
-bot = app().bot
+async def stop(self):
+    await super().stop()
 
-if __name__ == "__main__":
-    LOGGER.info("Starting the bot...")
-    app = app()
-    app.run()
+LOG.info("Starting the bots...")
