@@ -11,11 +11,6 @@ from Banall import LOGGER as LOG
 from Banall.modules import ALL_MODULES 
 
 
-# Initialize Pyrogram and Telethon clients
-app = None  # Pyrogram Client initialized globally
-bot = None #Telethone Client initialized globally
-
-
 async def start_pyrogram():
     global app
     try:
