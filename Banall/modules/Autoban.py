@@ -1,7 +1,8 @@
 from telethon import events, errors
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
-from Banall import bot, OWNER_ID
+from Banall import bot
+from config import OWNER_ID
 import asyncio
 import logging
 
