@@ -7,7 +7,7 @@ from telethon.sync import TelegramClient
 
 from config import OWNER_ID, BOT_USERNAME
 from Banall import app, bot
-from Banall import LOGGER as LOG
+from Banall.logging import LOGGER as LOG
 from Banall.modules import ALL_MODULES 
 
 
