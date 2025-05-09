@@ -30,13 +30,13 @@ bot = TelegramClient(
 )
 
 # Pyrogram Client methods
-@app.on_connect
-async def on_connect(client):
-    client.id = client.me.id
-    client.name = client.me.first_name + " " + (client.me.last_name or "")
-    client.username = client.me.username
-    client.mention = client.me.mention
-
+async def start(self):
+    await super().start()
+    self.id = self.me.id
+    self.name = self.me.first_name + " " + (self.me.last_name or "")
+    self.username = self.me.username
+    self.mention = self.me.mention
+    
 async def start():
     await app.start()
     await bot.start(bot_token=BOT_TOKEN)
