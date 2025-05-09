@@ -1,21 +1,20 @@
 import asyncio
 import importlib
+
 from pyrogram import idle
 from pyrogram.errors import FloodWait
 from telethon.errors import FloodError
-from telethon.sync import TelegramClient
 
-from config import OWNER_ID, BOT_USERNAME
 from Banall import app, bot
+from config import OWNER_ID, BOT_USERNAME
 from Banall.logging import LOGGER as LOG
-from Banall.modules import ALL_MODULES 
+from Banall.modules import ALL_MODULES
 
 
 async def start_pyrogram():
-    global app
     try:
         LOG.info("Starting Pyrogram Client...")
-        app = app or await app.start()  # Ensure app is started only once
+        await app.start()
         LOG.info("Pyrogram Client started successfully.")
     except Exception as ex:
         LOG.error(f"Error starting Pyrogram Client: {ex}")
@@ -25,8 +24,7 @@ async def start_pyrogram():
 async def start_telethon():
     try:
         LOG.info("Starting Telethon Client...")
-        # Directly start the session without requiring BOT_TOKEN
-        await bot.start()  # Session starts directly
+        await bot.start(bot_token=app.bot_token)
         LOG.info("Telethon Client started successfully.")
     except Exception as ex:
         LOG.error(f"Error starting Telethon Client: {ex}")
@@ -59,9 +57,8 @@ async def anony_boot():
     # Load all modules
     for all_module in ALL_MODULES:
         importlib.import_module("Banall.modules." + all_module)
-    
+
     LOG.info(f"@{BOT_USERNAME} Started with fallback mechanism.")
-    
     try:
         await idle()
     except (FloodWait, FloodError) as flood_ex:
@@ -86,3 +83,4 @@ async def anony_boot():
 
 if __name__ == "__main__":
     asyncio.get_event_loop().run_until_complete(anony_boot())
+    
