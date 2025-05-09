@@ -1,15 +1,15 @@
 import logging
 
-# LOGGER HANDLER
+import logging
+
+# Configure logging
 logging.basicConfig(
     level=logging.INFO,
-    format="[%(asctime)s - %(levelname)s] - %(name)s - %(message)s",
-    datefmt="%d-%b-%y %H:%M:%S",
-    handlers=[
-        logging.FileHandler("log.txt"),
-        logging.StreamHandler(),
-    ],
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
+
+# Create a logger instance
+LOGGER = logging.getLogger("BanallBot")
 
 logging.getLogger("httpx").setLevel(logging.ERROR)
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
