@@ -6,8 +6,8 @@ import config
 # Pyrogram Bot Client (With Bot Token)
 app = Client(
     name="app", 
-    api_id=config.APP_ID, 
-    api_hash=config.HASH_ID, 
+    api_id=config.API_ID, 
+    api_hash=config.API_HASH, 
     bot_token=config.BOT_TOKEN,
     plugins=dict(root="Banall.modules")
 )
@@ -16,7 +16,7 @@ app = Client(
 # Telethon Bot Client (With Bot Token)
 bot = TelegramClient(
              session="Bad",  # Add a session name here
-             api_id=config.APP_ID, 
-             api_hash=config.HASH_ID
+             api_id=config.API_ID, 
+             api_hash=config.API_HASH
              ).start(bot_token=config.BOT_TOKEN)
 
