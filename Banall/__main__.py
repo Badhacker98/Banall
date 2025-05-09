@@ -59,7 +59,7 @@ async def anony_boot():
     # Load all modules
     for all_module in ALL_MODULES:
         importlib.import_module("Banall.modules." + all_module)
-
+    
     LOG.info(f"@{BOT_USERNAME} Started with fallback mechanism.")
     
     try:
