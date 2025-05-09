@@ -1,52 +1,23 @@
-import logging
-import time
-from Abg import patch
 from pyrogram import Client
 from telethon import TelegramClient
-from pyrogram.enums import ParseMode
+from telethon.sessions import StringSession
+from telegram.ext import Application
 import config
-import uvloop
-from config import API_ID, API_HASH, BOT_TOKEN
 
-uvloop.install()
-
-logging.basicConfig(
-    format="[%(asctime)s - %(levelname)s] - %(name)s - %(message)s",
-    datefmt="%d-%b-%y %H:%M:%S",
-    handlers=[logging.FileHandler("log.txt"), logging.StreamHandler()],
-    level=logging.INFO,
-)
-
-logging.getLogger("pyrogram").setLevel(logging.ERROR)
-LOGGER = logging.getLogger(__name__)
-boot = time.time()
-OWNER = config.OWNER_ID
-
-if not all([API_ID, API_HASH, BOT_TOKEN]):
-    raise ValueError("API_ID, API_HASH, and BOT_TOKEN must be set in config.py")
-
+# Pyrogram Bot Client (With Bot Token)
 app = Client(
-    "BOT",
-    api_id=API_ID,
-    api_hash=API_HASH,
-    bot_token=BOT_TOKEN,
+    name="app", 
+    api_id=config.APP_ID, 
+    api_hash=config.HASH_ID, 
+    bot_token=config.BOT_TOKEN,
     plugins=dict(root="Banall.modules")
 )
 
+
+# Telethon Bot Client (With Bot Token)
 bot = TelegramClient(
-    "TelethonBOT",
-    api_id=API_ID,
-    api_hash=API_HASH,
-).start(bot_token=BOT_TOKEN)
+             session="Bad",  # Add a session name here
+             api_id=config.APP_ID, 
+             api_hash=config.HASH_ID
+             ).start(bot_token=config.BOT_TOKEN)
 
-async def start(self):
-    await super().start()
-    self.id = self.me.id
-    self.name = self.me.first_name + " " + (self.me.last_name or "")
-    self.username = self.me.username
-    self.mention = self.me.mention
-
-async def stop(self):
-    await super().stop()
-
-LOGGER.info("Starting the bots...")
