@@ -1,4 +1,5 @@
 from Banall import app
+from pyrogram import filters
 from pyrogram.errors import FloodWait
 
 MAX_CONCURRENT_BANS = 100000  # Limit to avoid hitting Telegram rate limits
