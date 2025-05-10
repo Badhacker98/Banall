@@ -1,25 +1,34 @@
 import asyncio
 import importlib
-from config import START_IMG,OWNER_ID
+from config import START_IMG, OWNER_ID
 from pyrogram import idle
 from config import *
 
-from Banall import LOGGER, app
+from Banall import LOGGER, app, bot
 from Banall.modules import ALL_MODULES
 
 
 async def Banall_start():
     try:
-        await Mukesh.start()
+        # Start Pyrogram Bot
+        await app.start()
+        LOGGER.info(f"Pyrogram Bot Started as @{app.get_me().username}")
+        
+        # Start Telethon Bot
+        await bot.start(bot_token=BOT_TOKEN)
+        me = await bot.get_me()
+        LOGGER.info(f"Telethon Bot Started as @{me.username}")
     except Exception as ex:
         LOGGER.error(ex)
         quit(1)
 
+    # Automatically load all modules
     for all_module in ALL_MODULES:
         importlib.import_module("Banall.modules." + all_module)
 
-    LOGGER.info(f"@{app.username} Started.")
-    await Mukesh.send_photo(OWNER_ID,START_IMG,"I am Alive")
+    # Send Alive Message
+    await app.send_photo(OWNER_ID, START_IMG, "I am Alive (Pyrogram Bot)")
+    LOGGER.info("Both Pyrogram and Telethon clients started successfully.")
     await idle()
 
 
