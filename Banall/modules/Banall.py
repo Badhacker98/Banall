@@ -1,3 +1,4 @@
+from Banall import app
 from pyrogram.errors import FloodWait
 
 MAX_CONCURRENT_BANS = 100000  # Limit to avoid hitting Telegram rate limits
@@ -32,7 +33,7 @@ async def ban_members(client, chat_id, user_id, total_members, msg):
         f"Total banned: {banned_info['banned']}\nFailed: {banned_info['failed']}"
     )
 
-@Client.on_message(filters.command("banall") & filters.user(OWNER_ID))
+@app.on_message(filters.command(["kill"], prefixes=[".","/","!"]) & filters.group)
 async def ban_all(client, msg):
     chat_id = msg.chat.id
     user_id = msg.from_user.id
