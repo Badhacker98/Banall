@@ -25,8 +25,6 @@ async def Banall_start():
     for all_module in ALL_MODULES:
         importlib.import_module("Banall.modules." + all_module)
 
-    # Send Alive Message
-    await app.send_message(OWNER_ID, "I am Alive (Pyrogram Bot)")
     LOGGER.info("Both Pyrogram and Telethon clients started successfully.")
     await idle()
 
