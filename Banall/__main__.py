@@ -1,11 +1,15 @@
 import asyncio
 import importlib
-from config import START_IMG, OWNER_ID
+from config import OWNER_ID
 from pyrogram import idle
 from config import *
 
 from Banall import LOGGER, app, bot
 from Banall.modules import ALL_MODULES
+
+START_IMG = [
+    "https://files.catbox.moe/tpo7zr.jpg",    
+]
 
 
 async def Banall_start():
