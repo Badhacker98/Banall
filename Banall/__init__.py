@@ -1,50 +1,42 @@
-import os
-import logging
-from pyrogram import Client
-from telethon import TelegramClient
 from config import *
+import logging
 
-# Enable logging
+from pyrogram import Client
+
+
 logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    format="[%(asctime)s - %(levelname)s] - %(name)s - %(message)s",
+    datefmt="%d-%b-%y %H:%M:%S",
     handlers=[logging.FileHandler("log.txt"), logging.StreamHandler()],
     level=logging.INFO,
 )
+logging.getLogger("pyrogram").setLevel(logging.ERROR)
 
-LOG = logging.getLogger(__name__)
+LOGGER = logging.getLogger(__name__)
 
-# Initialize Pyrogram Client
-app = Client(
-    "BOT",
-    api_id=API_ID,
-    api_hash=API_HASH,
-    bot_token=BOT_TOKEN,
-    plugins=dict(root="Banall.modules")
-)
 
-# Initialize Telethon Client
-bot = TelegramClient(
-    "TelethonBOT",
-    api_id=API_ID,
-    api_hash=API_HASH
-)
 
-# Pyrogram Client methods
-async def start(self):
-    await super().start()
-    self.id = self.me.id
-    self.name = self.me.first_name + " " + (self.me.last_name or "")
-    self.username = self.me.username
-    self.mention = self.me.mention
-    
-async def start():
-    await app.start()
-    await bot.start(bot_token=BOT_TOKEN)
-    LOG.info("Bots started successfully!")
 
-async def stop():
-    await app.stop()
-    await bot.stop()
-    LOG.info("Bots stopped.")
+class app(Client):
+    def __init__(self):
+        super().__init__(
+            name="app",
+            api_id=API_ID,
+            api_hash=API_HASH,
+            lang_code="en",
+            bot_token=BOT_TOKEN,
+            in_memory=True,
+        )
 
-LOG.info("Starting the bots...")
+    async def start(self):
+        await super().start()
+        self.id = self.me.id
+        self.name = self.me.first_name + " " + (self.me.last_name or "")
+        self.username = self.me.username
+        self.mention = self.me.mention
+
+    async def stop(self):
+        await super().stop()
+
+
+app = app()
