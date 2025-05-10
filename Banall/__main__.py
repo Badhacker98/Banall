@@ -16,12 +16,12 @@ async def Banall_start():
     try:
         # Start Pyrogram Bot
         await app.start()
-        LOGGER.info(f"Pyrogram Bot Started as @{app.get_me().username}")
+        LOGGER.info(f"Pyrogram Bot Started")
         
         # Start Telethon Bot
         await bot.start(bot_token=BOT_TOKEN)
         me = await bot.get_me()
-        LOGGER.info(f"Telethon Bot Started as @{me.username}")
+        LOGGER.info(f"Telethon Bot Started ")
     except Exception as ex:
         LOGGER.error(ex)
         quit(1)
