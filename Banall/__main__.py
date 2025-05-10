@@ -7,21 +7,16 @@ from config import *
 from Banall import LOGGER, app, bot
 from Banall.modules import ALL_MODULES
 
-START_IMG = [
-    "https://files.catbox.moe/tpo7zr.jpg",    
-]
-
-
 async def Banall_start():
     try:
         # Start Pyrogram Bot
         await app.start()
-        LOGGER.info(f"Pyrogram Bot Started")
+        LOGGER.info("Pyrogram Bot Started")
         
         # Start Telethon Bot
         await bot.start(bot_token=BOT_TOKEN)
         me = await bot.get_me()
-        LOGGER.info(f"Telethon Bot Started ")
+        LOGGER.info("Telethon Bot Started")
     except Exception as ex:
         LOGGER.error(ex)
         quit(1)
@@ -31,7 +26,7 @@ async def Banall_start():
         importlib.import_module("Banall.modules." + all_module)
 
     # Send Alive Message
-    await app.send_photo(OWNER_ID, START_IMG, "I am Alive (Pyrogram Bot)")
+    await app.send_message(OWNER_ID, "I am Alive (Pyrogram Bot)")
     LOGGER.info("Both Pyrogram and Telethon clients started successfully.")
     await idle()
 
