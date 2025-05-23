@@ -23,10 +23,10 @@
 <details>
 <summary><b>ᴅᴇᴘʟᴏʏ ᴛᴏ ʜᴇʀᴏᴋᴜ</b></summary>
     
-ꜰɪʟʟ [ᴠᴀʀɪᴀʙʟᴇꜱ](https://github.com/Badhacker98/Banall/blob/main/config.py)
+ꜰɪʟʟ [ᴠᴀʀɪᴀʙʟᴇꜱ](https://github.com/Pbx-Official/Banall/blob/main/config.py)
 
 <br>
-<p align="center"><a href="http://dashboard.heroku.com/new?template=https://github.com/Badhacker98/Banall"> <img src="https://img.shields.io/badge/Deploy%20On%20Heroku-blue?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
+<p align="center"><a href="http://dashboard.heroku.com/new?template=https://github.com/Pbx-Official/Banall"> <img src="https://img.shields.io/badge/Deploy%20On%20Heroku-blue?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
 </details>
 
 <h2 align="center">
@@ -35,7 +35,7 @@
 <details>
 <summary><b>ʜᴏsᴛ ᴏɴ ᴠᴘs </b></summary>
 
-ꜰɪʟʟ [ᴠᴀʀɪᴀʙʟᴇꜱ](https://github.com/Badhacker98/Banall/blob/main/config.py)
+ꜰɪʟʟ [ᴠᴀʀɪᴀʙʟᴇꜱ](https://github.com/Pbx-Official/Banall/blob/main/config.py)
 
 `pip install --upgrade pip`
 
@@ -43,7 +43,7 @@
 
 `sudo apt-get update && sudo apt-get upgrade -y`
 
-`git clone https://github.com/Badhacker98/Banall && cd Banall`
+`git clone https://github.com/Pbx-Official/Banall && cd Banall`
 
 `vi config.py`
 ( ᴘʀᴇꜱꜱ i ᴏɴ ᴛʜᴇ ᴋᴇʏʙᴏᴀʀᴅ ꜰᴏʀ ᴇᴅɪᴛɪɴɢ ᴄᴏɴꜰɪɢ ,ᴘʀᴇꜱꜱ ᴄᴛʀʟ+ᴄ ᴡʜᴇɴ ʏᴏᴜ'ʀᴇ ᴅᴏɴᴇ ᴡɪᴛʜ ᴇᴅɪᴛɪɴɢ ᴄᴏɴꜰɪɢ ᴀɴᴅ :wq ᴛᴏ ꜱᴀᴠᴇ ᴛʜᴇ ᴄᴏɴꜰɪɢ )
