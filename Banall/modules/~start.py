@@ -62,7 +62,7 @@ button = InlineKeyboardMarkup([
     
        [
            InlineKeyboardButton("ʜᴇʟᴘ ߷", callback_data="help_"),
-           InlineKeyboardButton("sᴏᴜʀᴄᴇ ߷", url=f"https://github.com/Badhacker98/Banall/fork"),
+           InlineKeyboardButton("sᴏᴜʀᴄᴇ ߷", url=f"https://github.com/Pbx-Official/Banall/fork"),
         ],
     [
            InlineKeyboardButton("⟲ ᴄʟᴏꜱᴇ ⟳", callback_data="close_data"),  
